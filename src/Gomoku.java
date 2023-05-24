@@ -23,6 +23,7 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
                     board[x][y] = isBlack ? 1 : 2;
                     isBlack = !isBlack;
                     repaint();
+                    test(x, y);
                 }
             }
         });
@@ -48,6 +49,58 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
                 }
             }
         }
+    }
+
+    public void test(int x, int y) {
+        int x0, y0, points = 0;
+        //检测行
+        for(int i = 0; i < 14; i++) {
+            if(board[i][y] > 0 && board[i][y] == board[i+1][y]) points++;
+            else points = 0;
+            if(points > 3) System.out.println("GG");
+        }
+        points = 0;
+        //检测列
+        for(int i = 0; i < 14; i++) {
+            if(board[x][i] > 0 && board[x][i] == board[x][i+1]) points++;
+            else points = 0;
+            if(points > 3) System.out.println("GG");
+        }
+        points = 0;
+        //检测斜
+        if(x > y) {
+            x0 = x - y;
+            y0 = 0;
+        }
+        else {
+            x0 = 0;
+            y0 = y - x;
+        }
+        while(x0 >= 0 && x0 < 14 && y0 >= 0 && y0 < 14) {
+            if(board[x0][y0] > 0 && board[x0][y0] == board[x0+1][y0+1]) points++;
+            else points = 0;
+            if(points > 3) System.out.println("GG");
+            x0++;
+            y0++;
+        }
+        points = 0;
+        //反向
+        if(14 - x > y) {
+            x0 = x + y;
+            y0 = 0;
+        }
+        else {
+            x0 = 14;
+            y0 = y - (14 - x);
+        }
+        while(x0 > 0 && x0 < 15 && y0 >= 0 && y0 < 14) {
+            if(board[x0][y0] > 0 && board[x0][y0] == board[x0-1][y0+1]) points++;
+            else points = 0;
+            if(points > 3) System.out.println("GG");
+            x0--;
+            y0++;
+        }
+        points = 0;
     }
 
     public static void main(String[] args) {

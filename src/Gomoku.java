@@ -8,6 +8,9 @@ import java.awt.event.MouseEvent;
 public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一个类，它表示一个窗口，可以在其中添加组件并显示内容
     private int[][] board = new int[15][15];    //棋盘，数组中的元素值为0表示该位置没有棋子，为1表示该位置有黑子，为2表示该位置有白子
     private boolean isBlack = true; //当前落子颜色
+    private int[] logX = new int[225];
+    private int[] logY = new int[225];
+    private int pieces = 0;
 
     public Gomoku() {
         //设置窗口属性
@@ -26,16 +29,31 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
                     isBlack = !isBlack;
                     repaint();
                     test(x, y);
+                    logX[pieces] = x;
+                    logY[pieces] = y;
+                    pieces++;
                 }
             }
         });
 
         //认输按钮
-        JButton button = new JButton("认输");
-        add(button, BorderLayout.SOUTH);
-        button.addActionListener(new ActionListener() {
+        JButton buttonA = new JButton("认输");
+        add(buttonA, BorderLayout.SOUTH);
+        buttonA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new GG(!isBlack).setVisible(true);
+            }
+        });
+
+        //悔棋按钮
+        JButton buttonB = new JButton("悔棋");
+        add(buttonB, BorderLayout.NORTH);
+        buttonB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pieces > 0) pieces--;
+                board[logX[pieces]][logY[pieces]] = 0;
+                isBlack = !isBlack;
+                repaint();
             }
         });
     }

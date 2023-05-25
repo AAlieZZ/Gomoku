@@ -68,7 +68,7 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
         //绘制棋子
         if(isBlack) g.setColor(Color.BLACK);
         else g.setColor(Color.WHITE);
-        g.fillOval(20 + 7 * 40 - 20, 70 + 15 * 40 - 20, 40, 40);
+        g.fillOval(20 + 7 * 40 - 20, 65 + 15 * 40 - 20, 40, 40);
         for(int i = 0; i < 15; i++) {
             for(int j = 0; j < 15; j++) {
                 if(board[i][j] == 1) {

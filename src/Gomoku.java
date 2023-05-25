@@ -8,9 +8,9 @@ import java.awt.event.MouseEvent;
 public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一个类，它表示一个窗口，可以在其中添加组件并显示内容
     private int[][] board = new int[15][15];    //棋盘，数组中的元素值为0表示该位置没有棋子，为1表示该位置有黑子，为2表示该位置有白子
     private boolean isBlack = true; //当前落子颜色
-    private int[] logX = new int[225];
-    private int[] logY = new int[225];
-    private int pieces = 0;
+    private int[] logX = new int[225];  //记录 x 坐标
+    private int[] logY = new int[225];  //记录 y 坐标
+    private int pieces = 0; //记录落子
 
     public Gomoku() {
         //设置窗口属性
@@ -66,6 +66,9 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
             g.drawLine(20, 70 + i * 40, 580, 70 + i * 40);
         }
         //绘制棋子
+        if(isBlack) g.setColor(Color.BLACK);
+        else g.setColor(Color.WHITE);
+        g.fillOval(20 + 7 * 40 - 20, 70 + 15 * 40 - 20, 40, 40);
         for(int i = 0; i < 15; i++) {
             for(int j = 0; j < 15; j++) {
                 if(board[i][j] == 1) {

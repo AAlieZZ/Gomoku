@@ -50,9 +50,11 @@ public class Gomoku extends JFrame {    //继承 JFrame 是 Swing 库中的一�
         add(buttonB, BorderLayout.NORTH);
         buttonB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(pieces > 0) pieces--;
+                if(pieces > 0) {
+                    pieces--;
+                    isBlack = !isBlack;
+                }
                 board[logX[pieces]][logY[pieces]] = 0;
-                isBlack = !isBlack;
                 repaint();
             }
         });
